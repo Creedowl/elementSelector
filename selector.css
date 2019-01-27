@@ -1,0 +1,12 @@
+div#selecting {
+    background-color: #66ccff77;
+    position: absolute;
+    z-index: 1000002;
+    pointer-events: none;
+}
+
+div.selected {
+    position: absolute;
+    pointer-events: none;
+    background-color: #aa445577;
+}
