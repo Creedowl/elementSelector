@@ -25,7 +25,7 @@ var selected = document.getElementsByClassName('selected')[0] // selected cover
 if(!selected){
     selected = document.createElement('div')
     selected.classList.add('selected')
-    document.body.appendChild(selected)        
+    document.body.appendChild(selected)
 }
 
 if(!selector){
@@ -36,12 +36,12 @@ if(!selector){
 
 var moveListener = window.addEventListener('mousemove', event => {
     let target = event.target
-    if(target.id == 'selecting' || target.classList.contains('selected') || status != 0) return
+    if(target.id === 'selecting' || target.classList.contains('selected') || status !== 0) return
     highlight(target, selector)
 })
 
 var keyListener = window.addEventListener('keydown', event => {
-    if(status != 0 || status != 1) return
+    if(status !== 0 || status !== 1) return
     event.preventDefault()
     event.stopImmediatePropagation()
     event.stopPropagation()
@@ -67,7 +67,8 @@ var keyListener = window.addEventListener('keydown', event => {
 })
 
 var clickListener = window.addEventListener('click', event => {
-    if(status != 0) return
+    if(status !== 0) return
+    console.log(event)
     event.preventDefault()
     event.stopImmediatePropagation()
     event.stopPropagation()
