@@ -10,13 +10,9 @@
     },
     "default_title": "selector"
   },
-  "permissions": [
-    "activeTab"
-  ],
+  "permissions": [ "activeTab" ],
   "background": {
-    "scripts": [
-      "background.js"
-    ],
+    "scripts": [ "background.js" ],
     "persistent": false
   },
   "icons": {
