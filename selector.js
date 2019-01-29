@@ -25,7 +25,7 @@ var CANCEL = -1, SELECTED = 0, SELECTING = 1, // constants representing current 
     mode = SELECTING; // current mode: CANCLE, SELECTED or SELECTING
     selected = document.getElementsByClassName('selected')[0], // cover for selected element
     selector = document.getElementById('selector'); // cover for selecting element
-    target = null,
+    target = null, // selector
     listeners = { // list of event listeners
     "click": window.addEventListener('click', event => {
         if (mode !== SELECTING) return;
@@ -33,17 +33,17 @@ var CANCEL = -1, SELECTED = 0, SELECTING = 1, // constants representing current 
         event.stopPropagation();
         event.stopImmediatePropagation();
         mode = SELECTED;
-        target = event.target;
+        let target = event.target;
         highlight(target, selected);
         if (selector) selector.remove();
     }, true),
     "mousemove": window.addEventListener('mousemove', event => {
-        let target = event.target;
+        target = event.target;
         if (!target.classList.contains('selected') && mode === SELECTING)
             highlight(target, selector);
     }),
     "keydown": window.addEventListener('keydown', event => {
-        if (mode === CANCEL) return;
+        if (mode !== SELECTING) return;
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -52,20 +52,28 @@ var CANCEL = -1, SELECTED = 0, SELECTING = 1, // constants representing current 
                 stop();
                 break;
             case 'ArrowUp':
+            case 'w':
+            case 'W':
                 target = target.parentElement || target;
-                highlight(target, selected);
+                highlight(target, selector);
                 break;
             case 'ArrowDown':
+            case 's':
+            case 'S':
                 target = target.firstElementChild || target;
-                highlight(target, selected);
+                highlight(target, selector);
                 break;
             case 'ArrowLeft':
+            case 'a':
+            case 'A':
                 target = target.previousElementSibling || target;
-                highlight(target, selected);
+                highlight(target, selector);
                 break;
             case 'ArrowRight':
+            case 'd':
+            case 'D':
                 target = target.nextElementSibling || target;
-                highlight(target, selected);
+                highlight(target, selector);
                 break;
         };
     })};
@@ -75,6 +83,7 @@ if (!selected) {
     selected.className = 'selected';
     document.body.appendChild(selected);
 }
+
 if (!selector) {
     selector = document.createElement('div');
     selector.id = 'selecting';
